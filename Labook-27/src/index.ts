@@ -1,93 +1,14 @@
-import express, { Express, Request, Response } from "express"
-import cors from "cors"
-import knex from "knex"
-import dotenv from "dotenv"
-import Knex from "knex"
 import {app} from "./app"
+import { postRouter } from "./routes/PostRouter"
 import { userRouter } from "./routes/UserRouter"
 
-
-/**************************** CONFIG ******************************/
 app.use('/user', userRouter)
+app.use('/post', postRouter)
 
-/*
-dotenv.config()
-
-export const connection= knex({
-   client: "mysql",
-   connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
-      port: 3306,
-      multipleStatements: true
-   }
-})
-
-const app: Express = express()
-app.use(express.json())
-app.use(cors())
-
-/**************************** TYPES ******************************/
 /*
 type authenticationData = {
    id: string
 }
-
-type user = {
-   id: string,
-   name: string,
-   email: string,
-   password: string
-}
-
-enum POST_TYPES {
-   NORMAL = "normal",
-   EVENT = "event"
-}
-
-type post = {
-   id: string,
-   photo: string,
-   description: string,
-   type: POST_TYPES,
-   createdAt: Date,
-   authorId: string
-}
-
-
-/**************************** ENDPOINTS ******************************/
-/*
-app.post('/users', async (req: Request, res: Response) => {
-   try {
-      let message = "Success!"
-      const { name, email, password } = req.body
-
-      if (!name || !email || !password) {
-         res.statusCode = 406
-         message = '"name", "email" and "password" must be provided'
-         throw new Error(message)
-      }
-
-      const id: string = Date.now().toString()
-
-      await connection('labook_users')
-         .insert({
-            id,
-            name,
-            email,
-            password
-         })
-
-      res.status(201).send({ message })
-
-   } catch (error:any) {
-      res.statusCode = 400
-      let message = error.sqlMessage || error.message
-      res.send({ message })
-   }
-})
 
 app.post('/post', async (req: Request, res: Response) => {
    try {
