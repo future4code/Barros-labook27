@@ -12,9 +12,13 @@ POST http://localhost:3003/post/create
 Content-Type: application/json
 
 {
-    "photo":"Foto de gatinho",
-    "description": "Gatinhos fofos e amorosos",
+    "photo":"Foto de passarinho",
+    "description": "Passarinhos voando na paisagem",
     "type": "normal",
     "createdAt": "2023-01-30",
     "authorId": "e2ad7786-6fcd-4c95-89ba-ed4f06aa986e"
 }
+
+###
+GET http://localhost:3003/post/getId/b1bfe3c7-137c-415a-b880-2e3439f92c20
+Content-Type: application/json

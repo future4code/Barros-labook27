@@ -1,11 +1,11 @@
 import { post } from "../model/post";
 import { BaseDatabase } from "./BaseDatabase";
 
-export class PostDatabase extends BaseDatabase{
+export class PostDatabase extends BaseDatabase {
     private postTable = "labook_posts"
 
-    public createPost = async (post:post) =>{
-        try{
+    public createPost = async (post: post) => {
+        try {
             PostDatabase.connection.initialize()
             await PostDatabase.connection.insert({
                 id: post.id,
@@ -16,9 +16,35 @@ export class PostDatabase extends BaseDatabase{
                 author_id: post.authorId
             }).into(this.postTable)
 
-        }catch(error:any){
+        } catch (error: any) {
             throw new Error(error.message)
-        }finally{
+        } finally {
+            console.log("Conexão encerrada!")
+            PostDatabase.connection.destroy()
+        }
+    }
+
+    public getPostId = async (id: string):Promise<post> => {
+        try {
+            PostDatabase.connection.initialize()
+            const queryResult = await PostDatabase.connection()
+                .select("*")
+                .from(this.postTable)
+                .where({ id })
+
+            const post: post= {
+                id: queryResult[0].id,
+                photo: queryResult[0].photo,
+                description: queryResult[0].description,
+                type: queryResult[0].type,
+                createdAt: queryResult[0].created_at,
+                authorId: queryResult[0].author_id,
+            }
+            return post
+
+        } catch (error: any) {
+            throw new Error(error.message)
+        } finally {
             console.log("Conexão encerrada!")
             PostDatabase.connection.destroy()
         }
