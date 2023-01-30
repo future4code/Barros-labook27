@@ -3,38 +3,14 @@ import { postRouter } from "./routes/PostRouter"
 import { userRouter } from "./routes/UserRouter"
 
 app.use('/user', userRouter)
+
+app.use('/post', postRouter)
 app.use('/post', postRouter)
 
 /*
 type authenticationData = {
    id: string
 }
-
-app.post('/post', async (req: Request, res: Response) => {
-   try {
-      let message = "Success!"
-
-      const { photo, description, type, authorId } = req.body
-
-      const postId: string = Date.now().toString()
-
-      await connection("labook_posts")
-         .insert({
-            id:postId,
-            photo,
-            description,
-            type,
-            author_id: authorId
-         })
-
-      res.status(201).send({ message })
-
-   } catch (error:any) {
-      let message = error.sqlMessage || error.message
-      res.statusCode = 400
-      res.send({ message })
-   }
-})
 
 app.get('/posts/:id', async (req: Request, res: Response) => {
    try {
@@ -68,11 +44,5 @@ app.get('/posts/:id', async (req: Request, res: Response) => {
       res.statusCode = 400
       res.send({ message })
    }
-})
-
-/**************************** SERVER INIT ******************************/
-/*
-app.listen(3003, () => {
-   console.log("Server running on port 3003")
 })
 */

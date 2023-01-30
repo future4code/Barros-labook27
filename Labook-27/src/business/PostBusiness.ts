@@ -27,4 +27,15 @@ export class PostBusiness {
 
         }
     }
+    public getPostId = async(id:string)=>{
+        try{
+            
+            const postDatabase = new PostDatabase()
+            return await postDatabase.getPostId(id)
+
+        }catch(error:any){
+            throw new Error(error.message)
+        }
+    }
+    
 }
