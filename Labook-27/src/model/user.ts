@@ -4,3 +4,9 @@ export type user = {
     email: string,
     password: string
 }
+
+export type friendship = {
+    id: string,
+    idUser: string,
+    idFriend: string
+}
