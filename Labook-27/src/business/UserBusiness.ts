@@ -1,6 +1,6 @@
 import { UserDatabase } from "../data/UserDatabase";
-import { user } from "../model/user";
-import { UserInputDTO } from "../model/UserDTO";
+import { friendship, user } from "../model/user";
+import { IdFriendshipInputDTO, UserInputDTO } from "../model/UserDTO";
 import { generateId } from "../services/IdGenerator";
 
 export class UserBusiness{
@@ -20,6 +20,26 @@ export class UserBusiness{
 
             await userDatabase.createUser(user)
             
+        }catch(error:any){
+            throw new Error(error.message)
+        }
+    }
+
+    public makeFriendship = async (input: IdFriendshipInputDTO)=>{
+        try{
+            const userDatabase = new UserDatabase()
+            const { idUser, idFriend } = input
+
+            const id: string = generateId()
+
+            const friendship: friendship = {
+                id,
+                idUser,
+                idFriend
+            }
+
+            await userDatabase.makeFriendship(friendship)
+
         }catch(error:any){
             throw new Error(error.message)
         }
