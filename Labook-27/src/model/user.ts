@@ -10,3 +10,8 @@ export type friendship = {
     idUser: string,
     idFriend: string
 }
+
+export type endFriendship = {
+    idUser: string,
+    idFriend: string
+}
