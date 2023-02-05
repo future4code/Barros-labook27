@@ -40,5 +40,3 @@ npm run start
 
 Use o Postman para realizar as requisições desejadas.
 
-## :dart: Status do projeto
-O projeto está em andamento.
