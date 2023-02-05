@@ -1,6 +1,6 @@
 # Labook-27
 ## :memo: Descrição
-Projeto individual desenvolvido no back-end da Labenu. Com o objetivo de criar as funções básicas de uma rede social fictícia
+Projeto individual desenvolvido no back-end da Labenu. Com o objetivo de criar as funções básicas de uma rede social fictícia, utilizando a arquitetura em três camadas
 
 ## Pessoa desenvolvedora do projeto
 <img src="https://avatars.githubusercontent.com/u/102320940?v=4" width=115><br><h4>Jéssica Oliveira de Lima</h4>
@@ -14,6 +14,7 @@ Projeto individual desenvolvido no back-end da Labenu. Com o objetivo de criar a
 * cors
 * dotenv
 * MySQL
+* Arquitetura em 3 camadas (controller, business, data) 
 
 
 ## :rocket: Rodando o projeto
