@@ -40,3 +40,7 @@ Content-Type: application/json
     "idUser":"53b4c0c7-7883-430b-88d6-9a2bcaf32ae0",
     "idFriend":"e2ad7786-6fcd-4c95-89ba-ed4f06aa986e"
 }
+
+###
+GET http://localhost:3003/post/seeFeed
+Content-Type: application/json
