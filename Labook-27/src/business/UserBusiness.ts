@@ -1,5 +1,5 @@
 import { UserDatabase } from "../data/UserDatabase";
-import { InvalidFriendship } from "../error/CustomError";
+import { CustomError, InvalidBody, InvalidEmail, InvalidFriendship, InvalidPassword } from "../error/CustomError";
 import { endFriendship, friendship, user } from "../model/user";
 import { IdFriendshipInputDTO, UserInputDTO } from "../model/UserDTO";
 import { generateId } from "../services/IdGenerator";
@@ -9,6 +9,18 @@ export class UserBusiness {
         try {
             const userDatabase = new UserDatabase()
             const { name, email, password } = input
+            
+            if (!name || !email || !password){
+                throw new InvalidBody()
+            }
+
+            if(!email.includes("@")){
+                throw new InvalidEmail()
+            }
+
+            if(password.length < 8){
+                throw new InvalidPassword()
+            }
 
             const id: string = generateId()
 
@@ -22,7 +34,7 @@ export class UserBusiness {
             await userDatabase.createUser(user)
 
         } catch (error: any) {
-            throw new Error(error.message)
+            throw new CustomError(error.statusCode, error.message)
         }
     }
 
@@ -30,6 +42,10 @@ export class UserBusiness {
         try {
             const userDatabase = new UserDatabase()
             const { idUser, idFriend } = input
+
+            if(!idUser || !idFriend){
+                throw new InvalidBody()
+            }
 
             const id: string = generateId()
 
@@ -42,13 +58,17 @@ export class UserBusiness {
             await userDatabase.makeFriendship(friendship)
 
         } catch (error: any) {
-            throw new Error(error.message)
+            throw new CustomError(error.statusCode, error.message)
         }
     }
 
     public endFrienship = async (input: IdFriendshipInputDTO) => {
         try {
             const { idUser, idFriend } = input
+
+            if(!idUser || !idFriend){
+                throw new InvalidBody()
+            }
 
             const endFriendship: endFriendship = {
                 idUser,
@@ -66,7 +86,7 @@ export class UserBusiness {
 
 
         } catch (error: any) {
-            throw new Error(error.message)
+            throw new CustomError(error.statusCode, error.message)
 
         }
     }

@@ -1,14 +1,26 @@
 import { PostDatabase } from "../data/PostDatabase";
-import { post } from "../model/post";
+import { CustomError, InvalidBody, InvalidDescription, InvalidId, InvaliType } from "../error/CustomError";
+import { post, POST_TYPES } from "../model/post";
 import { PostInputDTO } from "../model/PostDTO";
 import { generateId } from "../services/IdGenerator";
-import { orderBy } from "../services/OrderBy";
 
 export class PostBusiness {
     public createPost = async (input: PostInputDTO) => {
         try {
             const postDatabase = new PostDatabase()
             const { photo, description, type, createdAt, authorId } = input
+
+            if (!photo || !description || !type || !createdAt || !authorId){
+                throw new InvalidBody()
+            }
+
+            if(type !== POST_TYPES.EVENT && type !== POST_TYPES.NORMAL){
+                throw new InvaliType()
+            }
+
+            if(description.length < 8){
+                throw new InvalidDescription()
+            }
 
             const id: string = generateId()
 
@@ -24,18 +36,21 @@ export class PostBusiness {
             await postDatabase.createPost(post)
 
         } catch (error: any) {
-            throw new Error(error.message)
+            throw new CustomError(error.statusCode, error.message)
 
         }
     }
     public getPostId = async(id:string)=>{
         try{
             
+            if(!id){
+                throw new InvalidId()
+            }
             const postDatabase = new PostDatabase()
             return await postDatabase.getPostId(id)
 
         }catch(error:any){
-            throw new Error(error.message)
+            throw new CustomError(error.statusCode, error.message)
         }
     }
 
@@ -46,7 +61,7 @@ export class PostBusiness {
             return await postDatabase.seeFeed()
 
         }catch(error:any){
-            throw new Error(error.message)
+            throw new CustomError(error.statusCode, error.message)
         }
     }
     
