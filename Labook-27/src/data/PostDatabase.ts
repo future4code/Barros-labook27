@@ -24,7 +24,7 @@ export class PostDatabase extends BaseDatabase {
         }
     }
 
-    public getPostId = async (id: string):Promise<post> => {
+    public getPostId = async (id: string): Promise<post> => {
         try {
             PostDatabase.connection.initialize()
             const queryResult = await PostDatabase.connection()
@@ -32,7 +32,7 @@ export class PostDatabase extends BaseDatabase {
                 .from(this.postTable)
                 .where({ id })
 
-            const post: post= {
+            const post: post = {
                 id: queryResult[0].id,
                 photo: queryResult[0].photo,
                 description: queryResult[0].description,
@@ -44,6 +44,25 @@ export class PostDatabase extends BaseDatabase {
 
         } catch (error: any) {
             throw new Error(error.message)
+        } finally {
+            console.log("Conexão encerrada!")
+            PostDatabase.connection.destroy()
+        }
+    }
+
+    public seeFeed = async () => {
+        try {
+            PostDatabase.connection.initialize()
+            const result = await PostDatabase.connection()
+                .select("*")
+                .from(this.postTable)
+                .orderBy("created_at", "DESC")
+
+            return result
+
+        } catch (error: any) {
+            throw new Error(error.message)
+
         } finally {
             console.log("Conexão encerrada!")
             PostDatabase.connection.destroy()

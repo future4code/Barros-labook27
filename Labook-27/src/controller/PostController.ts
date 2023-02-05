@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { PostBusiness } from "../business/PostBusiness";
-import { post } from "../model/post";
 import { PostInputDTO } from "../model/PostDTO";
 
 export class PostController {
@@ -28,11 +27,24 @@ export class PostController {
             const { idPost } = req.params
             const postBusiness = new PostBusiness()
             const result = await postBusiness.getPostId(idPost)
-       
-             res.status(200).send({ result })
-       
+
+            res.status(200).send({ result })
+
         } catch (error: any) {
             throw new Error(error.message)
+        }
+    }
+
+    public seeFeed = async (req: Request, res: Response) => {
+        try {
+            const postBusiness = new PostBusiness()
+            const result = await postBusiness.seeFeed()
+
+            res.status(200).send({ result })
+
+        } catch (error: any) {
+            throw new Error(error.message)
+
         }
     }
 }
