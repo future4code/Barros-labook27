@@ -4,9 +4,3 @@ import { userRouter } from "./routes/UserRouter"
 
 app.use('/user', userRouter)
 app.use('/post', postRouter)
-
-/*
-type authenticationData = {
-   id: string
-}
-*/
