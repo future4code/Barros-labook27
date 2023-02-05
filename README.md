@@ -11,7 +11,6 @@ Projeto individual desenvolvido no back-end da Labenu. Com o objetivo de criar a
 * VS Code
 * nodeJS
 * expressJS
-* axios
 * cors
 * dotenv
 * MySQL
