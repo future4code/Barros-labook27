@@ -6,7 +6,7 @@ Projeto individual desenvolvido no back-end da Labenu. Com o objetivo de criar a
 <img src="https://avatars.githubusercontent.com/u/102320940?v=4" width=115><br><h4>Jéssica Oliveira de Lima</h4>
 
 ## Link Deploy Render
-https://barros-labook27.onrender.com (não está funcionando!)
+https://barros-labook27.onrender.com
 
 ## :wrench: Tecnologias utilizadas
 * VS Code
